@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-3" style="font-family: 'Montserrat', sans-serif;">
+                <i class="fas fa-shield-alt me-3"></i>Secure File Sharing
+            </h1>
+            <p class="lead mb-0" style="color: rgba(255, 255, 255, 0.9);">
+                Share your files securely with automatic encryption and expiring links
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-transparent">
+                <h4 class="mb-0 text-white">
+                    <i class="fas fa-upload me-2"></i>Upload File
+                </h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="file" class="form-label">
+                            <i class="fas fa-file-upload me-2"></i>Choose File
+                        </label>
+                        <input type="file" class="form-control animate-hover" id="file" name="file" required>
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>Maximum file size: 16MB
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="expiry_hours" class="form-label">
+                                    <i class="fas fa-clock me-2"></i>Link Expiration
+                                </label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control animate-hover" id="expiry_hours" 
+                                           name="expiry_hours" value="24" min="1" max="168" required>
+                                    <span class="input-group-text" style="background: var(--glass-bg); color: white; border-color: var(--glass-border)">
+                                        hours
+                                    </span>
+                                </div>
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>Maximum 168 hours (7 days)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="max_downloads" class="form-label">
+                                    <i class="fas fa-download me-2"></i>Download Limit
+                                </label>
+                                <input type="number" class="form-control animate-hover" id="max_downloads" 
+                                       name="max_downloads" min="1" max="100" placeholder="Optional">
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>Leave empty for unlimited downloads
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mb-4">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-shield-alt me-3 fa-2x"></i>
+                            <div>
+                                <h5 class="mb-1">Security Guarantee</h5>
+                                Your file will be encrypted using military-grade AES-256 encryption before storage.
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 animate-hover">
+                        <i class="fas fa-upload me-2"></i>Upload and Generate Secure Link
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
